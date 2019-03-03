@@ -35,7 +35,7 @@
 </head>
 <body ng-app="DynamoDbViewer" ng-controller="queryTable">
 <h2><span th:text="${tableName} + ' Table Query'"></span></h2>
-<div th:attr="ng-init='init(\''+${tableName}+'\', '+${@environment.getProperty('server.host')}+', '+${@environment.getProperty('server.port')}+' )'" ></div>
+<div th:attr="ng-init='init(\''+${tableName}+'\', \''+${@environment.getProperty('server.host')}+'\', '+${@environment.getProperty('server.port')}+' )'" ></div>
 
 <form>
     <div class="form-group">
