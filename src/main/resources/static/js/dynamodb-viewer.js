@@ -12,7 +12,7 @@ dynamoDbViewer.controller("listTables",
               total: 1,
               dataset: $scope.tables });
 
-        tmpHost = (host == "" || host == null) ? "localhost" : host;
+        tmpHost = (host == "" || host == null || host == "null") ? "localhost" : host;
         tmpPort = (port == "" || port == null) ? "8080" : port;
 
         var url = "http://" + tmpHost + ":" + tmpPort + "/api/list-tables"
@@ -25,7 +25,7 @@ dynamoDbViewer.controller("listTables",
             }, function(response) {
                 cfpLoadingBar.complete();
                 //Second function handles error
-                alert("Can not connect to DynamoDB Local. Please check connection and try again.");
+                alert("Can not connect to DynamoDB. Please check connection and try again.");
             });
     };
     $scope.inquiry = function(tableName) {
@@ -125,7 +125,7 @@ dynamoDbViewer.controller("inquiryTable",
           total: 1,
           dataset: $scope.tables });
 
-        var tmpHost = (host == "" || host == null) ? "localhost" : host;
+        var tmpHost = (host == "" || host == null || host == "null") ? "localhost" : host;
         var tmpPort = (port == "" || port == null) ? "8080" : port;
 
         var url = "http://" + tmpHost + ":" + tmpPort + "/api/scan/"
@@ -137,7 +137,7 @@ dynamoDbViewer.controller("inquiryTable",
                 cfpLoadingBar.complete();
             }, function(response) {
                 //Second function handles error
-                alert("Can not connect to DynamoDB Local. Please check connection and try again.");
+                alert("Can not connect to DynamoDB. Please check connection and try again.");
                 cfpLoadingBar.complete();
             });
         };
@@ -168,7 +168,7 @@ dynamoDbViewer.controller("queryTable",
           total: 1,
           dataset: $scope.tables });
 
-    var tmpHost = (host == "" || host == null) ? "localhost" : host;
+    var tmpHost = (host == "" || host == null || host == "null") ? "localhost" : host;
     var tmpPort = (port == "" || port == null) ? "8080" : port;
 
     var url = "http://" + tmpHost + ":" + tmpPort + "/api/query/"
@@ -180,7 +180,7 @@ dynamoDbViewer.controller("queryTable",
             cfpLoadingBar.complete();
         }, function(response) {
             //Second function handles error
-            alert("Can not connect to DynamoDB Local. Please check connection and try again.");
+            alert("Can not connect to DynamoDB. Please check connection and try again.");
             cfpLoadingBar.complete();
         });
     };

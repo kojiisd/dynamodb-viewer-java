@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>DynamoDB Loacl Viewer</title>
+    <title>DynamoDB Viewer</title>
     <script src="http://cdn.jsdelivr.net/webjars/angularjs/1.6.1/angular.min.js"
             th:src="@{/webjars/angularjs/1.6.1/angular.min.js}"></script>
     <script src="http://cdn.jsdelivr.net/webjars/jquery/3.1.1-1/jquery.min.js"
@@ -38,9 +38,9 @@
 </head>
 <body ng-app="DynamoDbViewer" ng-controller="listTables" >
 
-<div th:attr="ng-init='init('+${@environment.getProperty('server.host')}+', '+${@environment.getProperty('server.port')}+')'"></div>
+<div th:attr="ng-init='init(\''+${@environment.getProperty('server.host')}+'\', '+${@environment.getProperty('server.port')}+')'"></div>
 
-<h2>DynamoDB Local Table List</h2>
+<h2>DynamoDB Table List</h2>
 <table ng-table="tableParams" class="table table-condensed table-bordered table-striped">
     <tr ng-repeat="table in tables">
         <td style="width:10%" data-title="'No'">{{ $index + 1 }}</td>
