@@ -1,0 +1,72 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>[Scan]DynamoDB Loacl Viewer</title>
+    <script src="http://cdn.jsdelivr.net/webjars/angularjs/1.6.1/angular.min.js"
+            th:src="@{/webjars/angularjs/1.6.1/angular.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/3.1.1-1/jquery.min.js"
+            th:src="@{/webjars/jquery/3.1.1-1/jquery.min.js}"></script>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/ng-table/0.3.3/ng-table.min.css"
+          th:href="@{/webjars/ng-table/0.3.3/ng-table.min.css}"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/angular-loading-bar/0.9.0/loading-bar.min.css"
+          th:href="@{/webjars/angular-loading-bar/0.9.0/loading-bar.min.css}"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/font-awesome/4.7.0/font-awesome.min.css"
+          th:href="@{/templates/css/font-awesome-4.7.0/css/font-awesome.min.css}" />
+    <script src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/ng-table/0.3.3/ng-table.min.js"
+            th:src="@{/webjars/ng-table/0.3.3/ng-table.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/angular-loading-bar/0.9.0/loading-bar.min.js"
+            th:src="@{/webjars/angular-loading-bar/0.9.0/loading-bar.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/angular-ui-bootstrap/2.2.0/ui-bootstrap.min.js"
+            th:src="@{/webjars/angular-ui-bootstrap/2.2.0/ui-bootstrap.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"
+            th:src="@{/webjars/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js}"></script>
+    <script src="../static/js/dynamodb-viewer.js" th:src="@{/js/dynamodb-viewer.js}"></script>
+
+    <style>
+    table, th , td {
+      border: 1px solid grey;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+    table, form {
+        width: 75% !important;
+    }
+    </style>
+
+</head>
+<body ng-app="DynamoDbViewer" ng-controller="inquiryTable">
+<h2><span th:text="${tableName} + ' Table Scan'"></span></h2>
+<div th:attr="ng-init='init(\''+${tableName}+'\', '+${@environment.getProperty('server.host')}+', '+${@environment.getProperty('server.port')}+' )'" ></div>
+
+<form>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input type="text" class="form-control" placeholder="Keyword for search" ng-model="searchWord"></input>
+        </div>
+    </div>
+</form>
+
+<table class="table table-condensed table-bordered table-striped">
+    <thead>
+        <tr ng-repeat="data in datas | limitTo:1">
+            <th ng-repeat="(key, val) in data">
+                <a href="#" ng-click="setSortType(key); setSortReverse(sortReverse)">
+                    <span ng-show="sortType == '{{ key }}'" class="fa"></span>
+                    {{ key }}
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchWord">
+          <td ng-repeat="(key, val) in data">{{ val }}</td>
+      </tr>
+    </tbody>
+</table>
+</body>
+</html>
