@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.util.StringUtils;
+import software.amazon.codeguruprofilerjavaagent.Profiler;
 
 /**
  * @author kojiisd
@@ -22,7 +23,11 @@ import org.springframework.util.StringUtils;
 public class DynamodbViewApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(DynamodbViewApplication.class, args);
+        new Profiler.Builder()
+                .profilingGroupName("sample-profiling-group")
+                .build().start();
     }
 
     @Value("${amazon.dynamodb.endpoint}")

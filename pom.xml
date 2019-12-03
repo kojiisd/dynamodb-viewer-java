@@ -31,6 +31,12 @@
         <!--<url>http://repo.opensourceagility.com/release/</url>-->
         <!--</repository>-->
 
+        <repository>
+            <id>codeguru-profiler</id>
+            <name>codeguru-profiler</name>
+            <url>https://d1osg35nybn3tt.cloudfront.net</url>
+        </repository>
+
     </repositories>
 
     <dependencies>
@@ -101,6 +107,12 @@
             <groupId>com.github.derjust</groupId>
             <artifactId>spring-data-dynamodb</artifactId>
             <version>4.4.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>codeguru-profiler-java-agent</artifactId>
+            <version>0.1.0</version>
         </dependency>
 
         <dependency>
